@@ -6,7 +6,7 @@
 /*   By: aqueiroz <aqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 13:08:09 by aqueiroz          #+#    #+#             */
-/*   Updated: 2023/09/23 18:52:41 by aqueiroz         ###   ########.fr       */
+/*   Updated: 2023/09/23 20:08:52 by aqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,8 @@ typedef struct s_philo
 	int				id;
 	t_state			state;
 	pthread_t		thread;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
 	int				eat_count;
 	long			last_meal;
-	struct s_philo	*next;
 }					t_philo;
 
 typedef struct s_table
@@ -47,6 +44,7 @@ typedef struct s_table
 	int				time_to_sleep;
 	int				num_eat;
 	long			start_time;
+	pthread_mutex_t	*forks;
 	t_philo			*philos;
 }					t_table;
 
