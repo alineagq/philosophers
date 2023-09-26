@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aqueiroz <aqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 13:46:27 by aqueiroz          #+#    #+#             */
-/*   Updated: 2023/09/25 16:11:56 by aqueiroz         ###   ########.fr       */
+/*   Created: 2023/09/25 16:08:51 by aqueiroz          #+#    #+#             */
+/*   Updated: 2023/09/25 22:23:30 by aqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	init_simulation(int argc, char **argv)
+long	get_time(void)
 {
-	int	exit_status;
+	struct timeval	time;
 
-	exit_status = EXIT_SUCCESS;
-	exit_status = init_table(argc, argv);
-	if (!exit_status)
-		exit_status = init_philosopher();
-	get_table_info();
-	return (exit_status);
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
+void	ft_usleep(long time)
+{
+	long	start;
+
+	start = get_time();
+	while (get_time() - start < time)
+		usleep(100);
 }

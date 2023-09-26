@@ -6,7 +6,7 @@
 /*   By: aqueiroz <aqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 13:07:36 by aqueiroz          #+#    #+#             */
-/*   Updated: 2023/09/23 17:52:59 by aqueiroz         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:11:33 by aqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	check_args(int argc, char **argv)
 {
 	int	i;
-	int	num;
 
 	if (argc < 5 || argc > 6)
 		error("❌ - Wrong number of arguments.\n", EXIT_FAILURE);
@@ -24,7 +23,6 @@ static void	check_args(int argc, char **argv)
 	i = 2;
 	while (argv[i])
 	{
-		num = ft_atoi(argv[i]);
 		if (str_is_digit(argv[i]))
 			error("❌ - Arguments must be numbers.\n", EXIT_FAILURE);
 		else if (ft_atoi(argv[i]) < 0)
@@ -41,7 +39,8 @@ int	main(int argc, char **argv)
 	check_args(argc, argv);
 	if (init_simulation(argc, argv))
 		return (EXIT_FAILURE);
-	// run_simulation();
-	// clear_exit();
+	run_simulation();
+	clean_simulation();
+	free(get_table());
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: aqueiroz <aqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:11:26 by aqueiroz          #+#    #+#             */
-/*   Updated: 2023/09/23 18:55:03 by aqueiroz         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:19:45 by aqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,33 @@ t_table	*get_table(void)
 	static t_table	table;
 
 	return (&table);
+}
+
+int	init_table(int argc, char **argv)
+{
+	t_table	*table;
+
+	table = get_table();
+	table->num_philos = ft_atoi(argv[1]);
+	table->time_to_die = ft_atoi(argv[2]);
+	table->time_to_eat = ft_atoi(argv[3]);
+	table->time_to_sleep = ft_atoi(argv[4]);
+	if (argc == 6)
+		table->num_eat = ft_atoi(argv[5]);
+	else
+		table->num_eat = -1;
+	table->philos = NULL;
+	table->forks = NULL;
+	table->any_philosopher_dead = 0;
+	table->start_time = get_time();
+	table->all_philosophers_finished_eating = 0;
+	table->forks = malloc(sizeof(pthread_mutex_t) * table->num_philos);
+	if (!table->forks)
+		error("Error: malloc failed.\n", EXIT_FAILURE);
+	table->philos = malloc(sizeof(t_philo) * table->num_philos);
+	if (!table->philos)
+		error("Error: malloc failed.\n", EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 void	get_table_info(void)
