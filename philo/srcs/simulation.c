@@ -6,7 +6,7 @@
 /*   By: aqueiroz <aqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:26:04 by aqueiroz          #+#    #+#             */
-/*   Updated: 2023/09/25 23:02:02 by aqueiroz         ###   ########.fr       */
+/*   Updated: 2023/09/26 01:26:25 by aqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,25 @@ int	keep_threads_alive(t_philo *philo)
 		pthread_mutex_unlock(&table->death_mutex);
 		return (1);
 	}
-	if (table->all_philosophers_finished_eating)
+	else if (table->all_philosophers_finished_eating)
 	{
 		pthread_mutex_unlock(&table->death_mutex);
 		return (1);
 	}
-	if (get_time() - philo->last_meal > table->time_to_die)
+	else if (get_time() - philo->last_meal > table->time_to_die)
 	{
 		print_status(philo, DIED);
 		table->any_philosopher_dead = 1;
 		pthread_mutex_unlock(&table->death_mutex);
 		return (1);
 	}
-	if (table->num_eat != -1 && all_philosophers_have_eaten(table))
+	else if (table->num_eat != -1 && all_philosophers_have_eaten(table))
 	{
 		table->all_philosophers_finished_eating = 1;
 		pthread_mutex_unlock(&table->death_mutex);
 		return (1);
 	}
-	if (philo->status == DIED)
+	else if (philo->status == DIED)
 	{
 		pthread_mutex_unlock(&table->death_mutex);
 		return (1);
@@ -66,7 +66,7 @@ void	*routine(void *arg)
 		if (philo->status == THINKING)
 		{
 			print_status(philo, THINKING);
-			ft_usleep(table->time_to_eat);
+			ft_usleep(1);
 			philo->status = EATING;
 			if (keep_threads_alive(philo))
 				return (NULL);
@@ -76,6 +76,14 @@ void	*routine(void *arg)
 			if (keep_threads_alive(philo))
 				return (NULL);
 			eat(philo);
+			pthread_mutex_lock(&table->death_mutex);
+			if (philo->eat_count == table->num_eat)
+			{
+				table->all_philosophers_finished_eating = 1;
+				pthread_mutex_unlock(&table->death_mutex);
+				return (NULL);
+			}
+			pthread_mutex_unlock(&table->death_mutex);
 		}
 		if (philo->status == SLEEPING)
 		{

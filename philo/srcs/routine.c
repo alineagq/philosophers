@@ -6,7 +6,7 @@
 /*   By: aqueiroz <aqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:42:16 by aqueiroz          #+#    #+#             */
-/*   Updated: 2023/09/25 22:38:56 by aqueiroz         ###   ########.fr       */
+/*   Updated: 2023/09/26 01:28:16 by aqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,12 @@ static void	drop_forks(t_philo *philo, pthread_mutex_t *forks, int left_fork_id,
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_unlock(&forks[left_fork_id]);
-		print_status(philo, DROP_FORKS);
 		pthread_mutex_unlock(&forks[right_fork_id]);
 		print_status(philo, DROP_FORKS);
 	}
 	else
 	{
 		pthread_mutex_unlock(&forks[right_fork_id]);
-		print_status(philo, DROP_FORKS);
 		pthread_mutex_unlock(&forks[left_fork_id]);
 		print_status(philo, DROP_FORKS);
 	}
