@@ -6,7 +6,7 @@
 /*   By: aqueiroz <aqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:11:26 by aqueiroz          #+#    #+#             */
-/*   Updated: 2023/09/25 16:19:45 by aqueiroz         ###   ########.fr       */
+/*   Updated: 2023/09/26 22:23:40 by aqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,15 @@ int	init_table(int argc, char **argv)
 	table->philos = NULL;
 	table->forks = NULL;
 	table->any_philosopher_dead = 0;
-	table->start_time = get_time();
-	table->all_philosophers_finished_eating = 0;
 	table->forks = malloc(sizeof(pthread_mutex_t) * table->num_philos);
 	if (!table->forks)
 		error("Error: malloc failed.\n", EXIT_FAILURE);
 	table->philos = malloc(sizeof(t_philo) * table->num_philos);
 	if (!table->philos)
 		error("Error: malloc failed.\n", EXIT_FAILURE);
+	pthread_mutex_init(&table->data, NULL);
+	pthread_mutex_init(&table->print, NULL);
+	pthread_mutex_init(&table->died, NULL);
 	return (EXIT_SUCCESS);
 }
 

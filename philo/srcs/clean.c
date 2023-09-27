@@ -6,7 +6,7 @@
 /*   By: aqueiroz <aqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 01:06:34 by aqueiroz          #+#    #+#             */
-/*   Updated: 2023/09/25 18:08:31 by aqueiroz         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:29:54 by aqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	clean_simulation(void)
 		pthread_mutex_destroy(&table->forks[i]);
 		i++;
 	}
+	pthread_mutex_destroy(&table->data);
+	pthread_mutex_destroy(&table->print);
 	free(table->forks);
 	free(table->philos);
 }

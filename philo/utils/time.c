@@ -6,7 +6,7 @@
 /*   By: aqueiroz <aqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:08:51 by aqueiroz          #+#    #+#             */
-/*   Updated: 2023/09/26 01:25:32 by aqueiroz         ###   ########.fr       */
+/*   Updated: 2023/09/26 20:49:20 by aqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	ft_usleep(long time)
 
 	start = get_time();
 	while (get_time() - start < time)
-		usleep(1000);
+		usleep(10);
 }

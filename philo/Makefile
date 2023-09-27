@@ -6,7 +6,7 @@
 #    By: aqueiroz <aqueiroz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/31 21:48:24 by aqueiroz          #+#    #+#              #
-#    Updated: 2023/09/25 17:09:53 by aqueiroz         ###   ########.fr        #
+#    Updated: 2023/09/26 15:03:52 by aqueiroz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ FILES	+=	srcs/main.c \
 			srcs/philosopher.c \
 			srcs/clean.c \
 			srcs/simulation.c \
-			srcs/routine.c
+			srcs/eat.c \
+			srcs/think.c \
+			srcs/sleep.c
 
 FILES	+=	utils/utils.c \
 			utils/time.c

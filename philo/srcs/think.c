@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   think.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aqueiroz <aqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 13:46:27 by aqueiroz          #+#    #+#             */
-/*   Updated: 2023/09/26 14:58:58 by aqueiroz         ###   ########.fr       */
+/*   Created: 2023/09/26 15:02:15 by aqueiroz          #+#    #+#             */
+/*   Updated: 2023/09/26 20:16:11 by aqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	init_simulation(int argc, char **argv)
+void	thinking(t_philo *philo)
 {
-	int	exit_status;
-
-	exit_status = EXIT_SUCCESS;
-	exit_status = init_table(argc, argv);
-	if (!exit_status)
-		exit_status = init_philosopher();
-	get_table_info();
-	return (exit_status);
+	if (keep_threads_alive(philo))
+		return ;
+	print_status(philo, THINKING);
+	usleep(500);
+	philo->status = THINKING;
 }

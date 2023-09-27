@@ -6,7 +6,7 @@
 /*   By: aqueiroz <aqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 13:08:09 by aqueiroz          #+#    #+#             */
-/*   Updated: 2023/09/25 22:39:27 by aqueiroz         ###   ########.fr       */
+/*   Updated: 2023/09/26 22:23:23 by aqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,13 @@ typedef enum e_status
 
 typedef struct s_philo
 {
-	int				id;
-	int				eat_count;
-	long			last_meal;
-	int				left_fork_id;
-	int				right_fork_id;
-	t_status		status;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
-	pthread_t		thread;
-	pthread_t		death_thread;
+	int					id;
+	_Atomic int			eat_count;
+	_Atomic long long	last_meal;
+	int					left_fork_id;
+	int					right_fork_id;
+	t_status			status;
+	pthread_t			thread;
 }					t_philo;
 
 typedef struct table
@@ -49,13 +46,12 @@ typedef struct table
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
-	int				num_eat;
-	int				any_philosopher_dead;
-	int				all_philosophers_finished_eating;
-	long			start_time;
+	_Atomic int		num_eat;
+	_Atomic int		any_philosopher_dead;
+	_Atomic long	start_time;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	died;
-	pthread_mutex_t	death_mutex;
+	pthread_mutex_t	data;
 	pthread_mutex_t	print;
 	t_philo			*philos;
 }					t_table;
@@ -81,4 +77,7 @@ void				ft_usleep(long time);
 int					all_philosophers_have_eaten(t_table *table);
 int					one_philo_die(t_table *table, t_philo *philo);
 int					keep_threads_alive(t_philo *philo);
+void				thinking(t_philo *philo);
+void				take_forks(t_philo *philo);
+void				drop_forks(t_philo *philo);
 #endif

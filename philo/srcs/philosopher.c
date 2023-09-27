@@ -6,7 +6,7 @@
 /*   By: aqueiroz <aqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:11:24 by aqueiroz          #+#    #+#             */
-/*   Updated: 2023/09/25 22:55:22 by aqueiroz         ###   ########.fr       */
+/*   Updated: 2023/09/26 22:24:02 by aqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	init_philosopher(void)
 	while (i < table->num_philos)
 	{
 		table->philos[i].id = i + 1;
-		table->philos[i].eat_count = 0;
+		table->philos[i].eat_count = table->num_eat;
 		table->philos[i].last_meal = get_time();
 		table->philos[i].left_fork_id = i;
 		table->philos[i].right_fork_id = (i + 1) % table->num_philos;
@@ -35,17 +35,15 @@ int	init_philosopher(void)
 
 void	print_status(t_philo *philo, int status)
 {
-	t_table *table;
+	t_table	*table;
 
 	table = get_table();
 	pthread_mutex_lock(&table->print);
-	if ((table->any_philosopher_dead && philo->status != DIED)
-		|| table->all_philosophers_finished_eating)
+	if ((table->any_philosopher_dead && philo->status != DIED))
 	{
 		pthread_mutex_unlock(&table->print);
 		return ;
 	}
-	pthread_mutex_unlock(&table->print);
 	if (status == FORK)
 		printf("%ld %d has taken a fork\n", get_time() - table->start_time,
 			philo->id);
@@ -62,4 +60,5 @@ void	print_status(t_philo *philo, int status)
 			philo->id);
 	if (status == DIED)
 		printf("%ld %d died\n", get_time() - table->start_time, philo->id);
+	pthread_mutex_unlock(&table->print);
 }

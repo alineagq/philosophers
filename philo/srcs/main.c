@@ -6,7 +6,7 @@
 /*   By: aqueiroz <aqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 13:07:36 by aqueiroz          #+#    #+#             */
-/*   Updated: 2023/09/25 16:11:33 by aqueiroz         ###   ########.fr       */
+/*   Updated: 2023/09/26 20:44:20 by aqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,13 @@ static void	check_args(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
+	t_table	*table;
+
+	table = get_table();
 	check_args(argc, argv);
 	if (init_simulation(argc, argv))
 		return (EXIT_FAILURE);
+	table->start_time = get_time();
 	run_simulation();
 	clean_simulation();
 	free(get_table());
