@@ -6,7 +6,7 @@
 /*   By: aqueiroz <aqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:11:24 by aqueiroz          #+#    #+#             */
-/*   Updated: 2023/09/26 22:24:02 by aqueiroz         ###   ########.fr       */
+/*   Updated: 2023/09/27 11:47:30 by aqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,15 @@ int	init_philosopher(void)
 
 void	print_status(t_philo *philo, int status)
 {
-	t_table	*table;
+	t_table		*table;
+	const char	*print_status_strings[] = {
+		"died",
+		"is thinking",
+		"has taken a fork",
+		"dropped forks",
+		"is eating",
+		"is sleeping",
+	};
 
 	table = get_table();
 	pthread_mutex_lock(&table->print);
@@ -44,21 +52,7 @@ void	print_status(t_philo *philo, int status)
 		pthread_mutex_unlock(&table->print);
 		return ;
 	}
-	if (status == FORK)
-		printf("%ld %d has taken a fork\n", get_time() - table->start_time,
-			philo->id);
-	if (status == DROP_FORKS)
-		printf("%ld %d dropped forks\n", get_time() - table->start_time,
-			philo->id);
-	if (status == EATING)
-		printf("%ld %d is eating\n", get_time() - table->start_time, philo->id);
-	if (status == SLEEPING)
-		printf("%ld %d is sleeping\n", get_time() - table->start_time,
-			philo->id);
-	if (status == THINKING)
-		printf("%ld %d is thinking\n", get_time() - table->start_time,
-			philo->id);
-	if (status == DIED)
-		printf("%ld %d died\n", get_time() - table->start_time, philo->id);
+	printf("%ld %d %s\n", get_time() - table->start_time, philo->id,
+		print_status_strings[status]);
 	pthread_mutex_unlock(&table->print);
 }

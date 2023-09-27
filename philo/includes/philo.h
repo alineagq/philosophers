@@ -6,7 +6,7 @@
 /*   By: aqueiroz <aqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 13:08:09 by aqueiroz          #+#    #+#             */
-/*   Updated: 2023/09/26 22:23:23 by aqueiroz         ###   ########.fr       */
+/*   Updated: 2023/09/27 11:34:16 by aqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef enum e_status
 	DROP_FORKS,
 	EATING,
 	SLEEPING,
-}					t_status;
+}		t_status;
 
 typedef struct s_philo
 {
