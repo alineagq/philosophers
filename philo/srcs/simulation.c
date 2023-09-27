@@ -6,7 +6,7 @@
 /*   By: aqueiroz <aqueiroz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:26:04 by aqueiroz          #+#    #+#             */
-/*   Updated: 2023/09/26 22:24:10 by aqueiroz         ###   ########.fr       */
+/*   Updated: 2023/09/27 12:11:27 by aqueiroz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	keep_threads_alive(t_philo *philo)
 		pthread_mutex_unlock(&table->data);
 		return (1);
 	}
-	else if (get_time() - philo->last_meal >= table->time_to_die)
+	else if (get_time() - philo->last_meal > table->time_to_die)
 	{
 		print_status(philo, DIED);
 		table->any_philosopher_dead = 1;
